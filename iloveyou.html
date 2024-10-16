@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5e1da;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Hearts Animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff6b81;
+            transform: rotate(45deg);
+            animation: float 5s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff6b81;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -7.5px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 7.5px;
+            top: 0;
+        }
+
+        /* Heart positions */
+        .heart1 { left: 20%; animation-duration: 6s; animation-delay: 0s; }
+        .heart2 { left: 40%; animation-duration: 7s; animation-delay: 1s; }
+        .heart3 { left: 60%; animation-duration: 5s; animation-delay: 2s; }
+        .heart4 { left: 80%; animation-duration: 4s; animation-delay: 3s; }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.6);
+            color: #333;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+        .memories {
+            margin-top: 40px;
+            text-align: left;
+        }
+        .memory {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .memory h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        .memory p {
+            color: #555;
+            font-size: 16px;
+        }
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+            input[type="text"], textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hearts -->
+    <div class="heart heart1"></div>
+    <div class="heart heart2"></div>
+    <div class="heart heart3"></div>
+    <div class="heart heart4"></div>
+
+    <div class="container">
+        <h1>Our Memories</h1>
+        <form id="memoryForm">
+            <input type="text" id="title" placeholder="Memory Title" required><br>
+            <textarea id="description" rows="4" placeholder="Describe the memory" required></textarea><br>
+            <button type="submit">Add Memory</button>
+        </form>
+
+        <div class="memories" id="memories"></div>
+    </div>
+
+    <script>
+        const memoryForm = document.getElementById('memoryForm');
+        const memoriesDiv = document.getElementById('memories');
+
+        memoryForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+
+            if (title && description) {
+                const memoryDiv = document.createElement('div');
+                memoryDiv.classList.add('memory');
+                
+                const memoryTitle = document.createElement('h3');
+                memoryTitle.textContent = title;
+                
+                const memoryDescription = document.createElement('p');
+                memoryDescription.textContent = description;
+
+                memoryDiv.appendChild(memoryTitle);
+                memoryDiv.appendChild(memoryDescription);
+                memoriesDiv.appendChild(memoryDiv);
+
+                memoryForm.reset();
+            }
+        });
+    </script>
+
+</body></html>
+
